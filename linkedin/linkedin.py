@@ -136,7 +136,7 @@ class LinkedIn(object):
         
         self._debug = False
 
-    def request_token(self):
+    def request_token(self, scope=None):
         """
         Performs the corresponding API which returns the request token in a query string
         The POST Querydict must include the following:
@@ -152,7 +152,7 @@ class LinkedIn(object):
         method = "GET"
         relative_url = "/uas/oauth/requestToken"
         
-        query_dict = self._query_dict({"oauth_callback" : self._callback_url})
+        query_dict = self._query_dict({"oauth_callback" : self._callback_url, 'scope': scope or 'r_basicprofile'})
         
         self._calc_signature(self._get_url(relative_url), query_dict, self._request_token_secret, method)
 
